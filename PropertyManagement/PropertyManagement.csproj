@@ -11,6 +11,7 @@
   <PropertyGroup>
     <UserSecretsId>aspnet-PropertyManagement-02dfe501-4405-486d-bc0f-4b9793eed6ab</UserSecretsId>
   </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="Microsoft.ApplicationInsights.AspNetCore" Version="2.0.0" />
     <PackageReference Include="Microsoft.AspNetCore" Version="1.1.1" />
@@ -35,6 +36,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Views\GetStarted\" />
+    <Folder Include="Views\Inspection\" />
   </ItemGroup>
 
 </Project>

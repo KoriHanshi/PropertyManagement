@@ -1,0 +1,61 @@
+@model PropertyManagement.Models.InitialContact
+
+@{
+		ViewData["Title"] = "Initial Contact";
+}
+
+<h2>Lets Get Started!</h2>
+<form asp-action="Create" class="col-sm-12 col-md-9 col-lg-6">
+	<div class="form-horizontal">
+		<p>Leave us a little bit of information about yourself and your investment property, and we will contact you soon!</p>
+		<hr />
+		<div class="form-group">
+			<label asp-for="NameFirst" class="col-md-5 control-label"></label>
+			<div class="col-md-7">
+				<input asp-for="NameFirst" class="form-control" />
+				<span asp-validation-for="NameFirst" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="NameLast" class="col-md-5 control-label"></label>
+			<div class="col-md-7">
+				<input asp-for="NameLast" class="form-control" />
+				<span asp-validation-for="NameLast" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="Email" class="col-md-5 control-label"></label>
+			<div class="col-md-7">
+				<input asp-for="Email" class="form-control" type="email" />
+				<span asp-validation-for="Email" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="Phone" class="col-md-5 control-label"></label>
+			<div class="col-md-7">
+				<input asp-for="Phone" class="form-control" type="tel" />
+				<span asp-validation-for="Phone" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="Zip" class="col-md-5 control-label"></label>
+			<div class="col-md-7">
+				<input asp-for="Zip" class="form-control" type="text" />
+				<span asp-validation-for="Zip" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="BestTime" class="col-md-5 control-label"></label>
+			<div class="col-md-7">
+				<input asp-for="BestTime" class="form-control" type="time"/>
+				<span asp-validation-for="BestTime" class="text-danger"></span>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12">
+				<input type="submit" value="Submit" class="btn btn-primary pull-right" onclick="$.validate(this);" />
+			</div>
+		</div>
+	</div>
+</form>
+

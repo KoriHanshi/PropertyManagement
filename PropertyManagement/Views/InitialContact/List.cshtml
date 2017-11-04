@@ -1,0 +1,35 @@
+@model IEnumerable<PropertyManagement.Models.InitialContact>
+
+	@{
+			ViewData["Title"] = "Initial Contacts List";
+	}
+
+	<h2>Initial Contacts List</h2>
+
+	<section class="col-md-12">
+		<div class="header-container">
+			<div class="row">
+				<div class="col-md-2">@Html.DisplayNameFor(model => model.NameFirst)</div>
+				<div class="col-md-2">@Html.DisplayNameFor(model => model.NameLast)</div>
+				<div class="col-md-2">@Html.DisplayNameFor(model => model.Email)</div>
+				<div class="col-md-2">@Html.DisplayNameFor(model => model.Phone)</div>
+				@*<div class="col-md-2">@Html.DisplayNameFor(model => model.Zip)</div>*@
+				@*<div class="col-md-2">@Html.DisplayNameFor(model => model.BestTime)</div>*@
+				<div class="col-md-2">Zipcode</div>
+				<div class="col-md-2">Best Time</div>
+			</div>
+		</div>
+		<div class="body-container">
+			@foreach (var item in Model)
+			{
+					<div class="row table-row" data-action="FollowUp" data-controller="InitialContact" data-param-Id="@item.Id">
+						<div class="col-md-2">@Html.DisplayFor(modelItem => item.NameFirst)</div>
+						<div class="col-md-2">@Html.DisplayFor(modelItem => item.NameLast)</div>
+						<div class="col-md-2">@Html.DisplayFor(modelItem => item.Email)</div>
+						<div class="col-md-2">@Html.DisplayFor(modelItem => item.Phone)</div>
+						<div class="col-md-2">@Html.DisplayFor(modelItem => item.Zip)</div>
+						<div class="col-md-2">@Html.DisplayFor(modelItem => item.BestTime)</div>
+					</div>
+			}
+		</div>
+	</section>
