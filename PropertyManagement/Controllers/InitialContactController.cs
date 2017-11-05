@@ -54,7 +54,7 @@ namespace PropertyManagement.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,NameFirst,NameLast,Email,Phone,Zip,BestTime")] InitialContact initialContact)
+        public async Task<IActionResult> Index([Bind("Id,NameFirst,NameLast,Email,Phone,Zip,BestTime")] InitialContact initialContact)
         {
             if (ModelState.IsValid)
             {

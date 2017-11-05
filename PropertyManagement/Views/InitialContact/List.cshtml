@@ -23,12 +23,30 @@
 			@foreach (var item in Model)
 			{
 					<div class="row table-row" data-action="FollowUp" data-controller="InitialContact" data-param-Id="@item.Id">
-						<div class="col-md-2">@Html.DisplayFor(modelItem => item.NameFirst)</div>
-						<div class="col-md-2">@Html.DisplayFor(modelItem => item.NameLast)</div>
-						<div class="col-md-2">@Html.DisplayFor(modelItem => item.Email)</div>
-						<div class="col-md-2">@Html.DisplayFor(modelItem => item.Phone)</div>
-						<div class="col-md-2">@Html.DisplayFor(modelItem => item.Zip)</div>
-						<div class="col-md-2">@Html.DisplayFor(modelItem => item.BestTime)</div>
+						<div class="col-md-2">
+							<span class="mobile-header">@Html.DisplayNameFor(model => model.NameFirst): </span>
+							@Html.DisplayFor(modelItem => item.NameFirst)
+						</div>
+						<div class="col-md-2">
+							<span class="mobile-header">@Html.DisplayNameFor(model => model.NameLast): </span>
+							@Html.DisplayFor(modelItem => item.NameLast)
+						</div>
+						<div class="col-md-2">
+							<span class="mobile-header">@Html.DisplayNameFor(model => model.Email): </span>
+							@Html.DisplayFor(modelItem => item.Email)
+						</div>
+						<div class="col-md-2">
+							<span class="mobile-header">@Html.DisplayNameFor(model => model.Phone): </span>
+							@Html.DisplayFor(modelItem => item.Phone)
+						</div>
+						<div class="col-md-2">
+							<span class="mobile-header">Zipcode: </span>
+							@Html.DisplayFor(modelItem => item.Zip)
+						</div>
+						<div class="col-md-2">
+							<span class="mobile-header">Best Time: </span>
+							@Html.DisplayFor(modelItem => item.BestTime)
+						</div>
 					</div>
 			}
 		</div>
