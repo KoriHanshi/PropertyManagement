@@ -4,15 +4,14 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using PropertyManagement.Data;
-using PropertyManagement.Models.AccountModels;
-using PropertyManagement.Models;
 
 namespace PropertyManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171107061600_Account_Models")]
+    partial class Account_Models
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -125,68 +124,6 @@ namespace PropertyManagement.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PropertyManagement.Models.AccountModels.Account", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccountStatus");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Account");
-                });
-
-            modelBuilder.Entity("PropertyManagement.Models.AccountModels.AccountCommunication", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccountCommunicationType");
-
-                    b.Property<int>("AccountContactId");
-
-                    b.Property<int>("AccountId");
-
-                    b.Property<DateTime>("ContactTime");
-
-                    b.Property<string>("Outcome");
-
-                    b.Property<string>("Purpose");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountContactId");
-
-                    b.HasIndex("AccountId");
-
-                    b.ToTable("AccountCommunication");
-                });
-
-            modelBuilder.Entity("PropertyManagement.Models.AccountModels.AccountContact", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccountContactType");
-
-                    b.Property<int>("AccountId");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("MiddleInitial");
-
-                    b.Property<int>("SocialSecurity");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
-
-                    b.ToTable("AccountContact");
-                });
-
             modelBuilder.Entity("PropertyManagement.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -237,46 +174,26 @@ namespace PropertyManagement.Data.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("PropertyManagement.Models.EmailAddress", b =>
+            modelBuilder.Entity("PropertyManagement.Models.InitialContact", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccountContactId");
-
-                    b.Property<string>("Email");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountContactId");
-
-                    b.ToTable("EmailAddress");
-                });
-
-            modelBuilder.Entity("PropertyManagement.Models.PhoneNumber", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccountContactId");
-
-                    b.Property<int>("AreaCode");
 
                     b.Property<DateTime>("BestTime");
 
-                    b.Property<int>("Extension");
+                    b.Property<string>("Email");
 
-                    b.Property<int>("FirstThree");
+                    b.Property<string>("NameFirst");
 
-                    b.Property<int>("LastFour");
+                    b.Property<string>("NameLast");
 
-                    b.Property<int>("PhoneNumberType");
+                    b.Property<string>("Phone");
+
+                    b.Property<int>("Zip");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountContactId");
-
-                    b.ToTable("PhoneNumber");
+                    b.ToTable("InitialContact");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -313,43 +230,6 @@ namespace PropertyManagement.Data.Migrations
                     b.HasOne("PropertyManagement.Models.ApplicationUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PropertyManagement.Models.AccountModels.AccountCommunication", b =>
-                {
-                    b.HasOne("PropertyManagement.Models.AccountModels.AccountContact", "AccountContact")
-                        .WithMany("AccountCommunications")
-                        .HasForeignKey("AccountContactId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("PropertyManagement.Models.AccountModels.Account", "Account")
-                        .WithMany("AccountCommunications")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PropertyManagement.Models.AccountModels.AccountContact", b =>
-                {
-                    b.HasOne("PropertyManagement.Models.AccountModels.Account", "Account")
-                        .WithMany("AccountContacts")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PropertyManagement.Models.EmailAddress", b =>
-                {
-                    b.HasOne("PropertyManagement.Models.AccountModels.AccountContact", "AccountContact")
-                        .WithMany("EmailAddresses")
-                        .HasForeignKey("AccountContactId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PropertyManagement.Models.PhoneNumber", b =>
-                {
-                    b.HasOne("PropertyManagement.Models.AccountModels.AccountContact", "AccountContact")
-                        .WithMany("PhoneNumbers")
-                        .HasForeignKey("AccountContactId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

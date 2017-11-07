@@ -23,6 +23,10 @@ namespace PropertyManagement.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-        public DbSet<PropertyManagement.Models.InitialContact> InitialContact { get; set; }
-    }
+		public DbSet<PropertyManagement.Models.AccountModels.Account> Account { get; set; }
+		public DbSet<PropertyManagement.Models.AccountModels.AccountContact> AccountContact { get; set; }
+		public DbSet<PropertyManagement.Models.AccountModels.AccountCommunication> AccountCommunication { get; set; }
+		public DbSet<PropertyManagement.Models.PhoneNumber> PhoneNumber { get; set; }
+		public DbSet<PropertyManagement.Models.EmailAddress> EmailAddress { get; set; }
+	}
 }
