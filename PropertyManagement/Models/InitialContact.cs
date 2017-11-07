@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace PropertyManagement.Models
 {
-    public class InitialContact
-    {
+	public class InitialContact
+	{
 		[Key]
 		public int Id { get; set; }
 
@@ -31,13 +31,6 @@ namespace PropertyManagement.Models
 		[DisplayFormat(DataFormatString = "{0:hh:mm tt}")]
 		public DateTime BestTime { get; set; }
 
-		public InitialContactStatus Status { get; set; }
 	}
 
-	public enum InitialContactStatus
-	{
-		Initial = 0,
-		Cancelled = 1,
-		AppointmentSet = 2
-	}
 }

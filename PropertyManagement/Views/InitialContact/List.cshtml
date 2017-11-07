@@ -22,7 +22,7 @@
 		<div class="body-container">
 			@foreach (var item in Model)
 			{
-					<div class="row table-row" data-action="FollowUp" data-controller="InitialContact" data-param-Id="@item.Id">
+					<div class="row table-row" data-action="FollowUp" data-controller="InitialContact" data-param-Id="@item.Id" data-param-Test="yeah">
 						<div class="col-md-2">
 							<span class="mobile-header">@Html.DisplayNameFor(model => model.NameFirst): </span>
 							@Html.DisplayFor(modelItem => item.NameFirst)
@@ -48,6 +48,7 @@
 							@Html.DisplayFor(modelItem => item.BestTime)
 						</div>
 					</div>
+					
 			}
 		</div>
 	</section>

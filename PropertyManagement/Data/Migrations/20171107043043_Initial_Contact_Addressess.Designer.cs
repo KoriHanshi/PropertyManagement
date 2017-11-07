@@ -4,13 +4,15 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using PropertyManagement.Data;
+using PropertyManagement.Models;
 
 namespace PropertyManagement.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171107043043_Initial_Contact_Addressess")]
+    partial class Initial_Contact_Addressess
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -188,11 +190,37 @@ namespace PropertyManagement.Data.Migrations
 
                     b.Property<string>("Phone");
 
+                    b.Property<int>("Status");
+
                     b.Property<int>("Zip");
 
                     b.HasKey("Id");
 
                     b.ToTable("InitialContact");
+                });
+
+            modelBuilder.Entity("PropertyManagement.Models.InitialContactAddress", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("AddressLine1");
+
+                    b.Property<string>("AddressLine2");
+
+                    b.Property<string>("City");
+
+                    b.Property<int>("InitialContactId");
+
+                    b.Property<string>("State");
+
+                    b.Property<int>("Zip");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("InitialContactId");
+
+                    b.ToTable("InitialContactAddress");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -229,6 +257,14 @@ namespace PropertyManagement.Data.Migrations
                     b.HasOne("PropertyManagement.Models.ApplicationUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PropertyManagement.Models.InitialContactAddress", b =>
+                {
+                    b.HasOne("PropertyManagement.Models.InitialContact", "InitialContact")
+                        .WithMany("InitialContactAddresses")
+                        .HasForeignKey("InitialContactId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

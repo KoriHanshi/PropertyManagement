@@ -100,10 +100,6 @@
 
 		return ($(this).prop('tagName') == 'FORM') ? validateForm(this) : validateField(this);
 	};
-}(jQuery));
-
-// Register Validation
-(function ($) {
 	$.registerValidation = function () {
 
 		//register validation on form submission
@@ -118,11 +114,52 @@
 			filter(function (i, e) {
 				return ($(this).prop('type') != 'button' && $(this).prop('type') != 'submit');
 			}).each(function () {
-			$(this).on('blur', function () {
-				$(this).validate();
+				$(this).on('blur', function () {
+					$(this).validate();
+				});
+			});
+
+	};
+}(jQuery));
+
+// Navigation
+(function ($) {
+	$.fn.navigate = function () {
+		
+		var data = $(this).data();
+
+		function value(v) {
+			return ($.isNumeric(v)) ? v : '"' + v + '"';
+		};
+
+		function action(a) {
+			return (a && a != '' && a != 'Index') ? '/' + a : '';
+		}
+
+		function parameters(data) {
+
+			var queryStringVariables = [];
+
+			$(Object.keys(data).filter(function (p) { return p.indexOf('param') === 0; })).each(function () {
+
+				queryStringVariables.push(this.replace('param', '') + '=' + value(data[this]));
+
+			});
+
+			return (queryStringVariables.length > 0) ? '?' + queryStringVariables.join('&') : '';
+
+		};
+
+		(data['controller'] && data['controller'] != '') ?
+			window.location.href = '/' + data['controller'] + action(data['action']) + parameters(data) :
+			console.error('Navigation Failed! - Invalid URL');
+	};
+	$.registerNavigation = function () {
+		$('.table-row').each(function () {
+			$(this).click(function () {
+				$(this).navigate();
 			});
 		});
-
 	};
 }(jQuery));
 
@@ -130,6 +167,7 @@
 // Ready Page
 $(document).ready(function () {
 	$.registerValidation();
+	$.registerNavigation();
 });
 
 
