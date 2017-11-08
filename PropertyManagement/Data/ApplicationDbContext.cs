@@ -23,10 +23,10 @@ namespace PropertyManagement.Data
             // Add your customizations after calling base.OnModelCreating(builder);
         }
 
-		public DbSet<PropertyManagement.Models.AccountModels.Account> Account { get; set; }
-		public DbSet<PropertyManagement.Models.AccountModels.AccountContact> AccountContact { get; set; }
-		public DbSet<PropertyManagement.Models.AccountModels.AccountCommunication> AccountCommunication { get; set; }
-		public DbSet<PropertyManagement.Models.PhoneNumber> PhoneNumber { get; set; }
-		public DbSet<PropertyManagement.Models.EmailAddress> EmailAddress { get; set; }
+		public DbSet<PropertyManagement.Models.PortfolioModels.Portfolio> Portfolios { get; set; }
+		public DbSet<PropertyManagement.Models.PortfolioModels.PortfolioContact> PortfolioContacts { get; set; }
+		public DbSet<PropertyManagement.Models.PortfolioModels.PortfolioCommunication> PortfolioCommunications { get; set; }
+		public DbSet<PropertyManagement.Models.PhoneNumber> PhoneNumbers { get; set; }
+		public DbSet<PropertyManagement.Models.EmailAddress> EmailAddresses { get; set; }
 	}
 }

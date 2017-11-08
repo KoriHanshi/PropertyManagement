@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Threading.Tasks;
 
-namespace PropertyManagement.Models
+namespace PropertyManagement.Models.PortfolioModels
 {
-	public class InitialContact
+	public class Lead
 	{
 		[Key]
 		public int Id { get; set; }

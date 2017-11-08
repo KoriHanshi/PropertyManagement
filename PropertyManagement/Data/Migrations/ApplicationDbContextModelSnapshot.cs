@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using PropertyManagement.Data;
-using PropertyManagement.Models.AccountModels;
 using PropertyManagement.Models;
+using PropertyManagement.Models.PortfolioModels;
 
 namespace PropertyManagement.Data.Migrations
 {
@@ -125,68 +125,6 @@ namespace PropertyManagement.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("PropertyManagement.Models.AccountModels.Account", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccountStatus");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Account");
-                });
-
-            modelBuilder.Entity("PropertyManagement.Models.AccountModels.AccountCommunication", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccountCommunicationType");
-
-                    b.Property<int>("AccountContactId");
-
-                    b.Property<int>("AccountId");
-
-                    b.Property<DateTime>("ContactTime");
-
-                    b.Property<string>("Outcome");
-
-                    b.Property<string>("Purpose");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountContactId");
-
-                    b.HasIndex("AccountId");
-
-                    b.ToTable("AccountCommunication");
-                });
-
-            modelBuilder.Entity("PropertyManagement.Models.AccountModels.AccountContact", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccountContactType");
-
-                    b.Property<int>("AccountId");
-
-                    b.Property<string>("FirstName");
-
-                    b.Property<string>("LastName");
-
-                    b.Property<string>("MiddleInitial");
-
-                    b.Property<int>("SocialSecurity");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AccountId");
-
-                    b.ToTable("AccountContact");
-                });
-
             modelBuilder.Entity("PropertyManagement.Models.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
@@ -242,23 +180,21 @@ namespace PropertyManagement.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<int>("AccountContactId");
-
                     b.Property<string>("Email");
+
+                    b.Property<int>("PortfolioContactId");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountContactId");
+                    b.HasIndex("PortfolioContactId");
 
-                    b.ToTable("EmailAddress");
+                    b.ToTable("EmailAddresses");
                 });
 
             modelBuilder.Entity("PropertyManagement.Models.PhoneNumber", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
-
-                    b.Property<int>("AccountContactId");
 
                     b.Property<int>("AreaCode");
 
@@ -272,11 +208,75 @@ namespace PropertyManagement.Data.Migrations
 
                     b.Property<int>("PhoneNumberType");
 
+                    b.Property<int>("PortfolioContactId");
+
                     b.HasKey("Id");
 
-                    b.HasIndex("AccountContactId");
+                    b.HasIndex("PortfolioContactId");
 
-                    b.ToTable("PhoneNumber");
+                    b.ToTable("PhoneNumbers");
+                });
+
+            modelBuilder.Entity("PropertyManagement.Models.PortfolioModels.Portfolio", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("PortfolioStatus");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Portfolios");
+                });
+
+            modelBuilder.Entity("PropertyManagement.Models.PortfolioModels.PortfolioCommunication", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("ContactTime");
+
+                    b.Property<string>("Outcome");
+
+                    b.Property<int>("PortfolioCommunicationType");
+
+                    b.Property<int>("PortfolioContactId");
+
+                    b.Property<int>("PortfolioId");
+
+                    b.Property<string>("Purpose");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PortfolioContactId");
+
+                    b.HasIndex("PortfolioId");
+
+                    b.ToTable("PortfolioCommunications");
+                });
+
+            modelBuilder.Entity("PropertyManagement.Models.PortfolioModels.PortfolioContact", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("LastName");
+
+                    b.Property<string>("MiddleInitial");
+
+                    b.Property<int>("PortfolioContactType");
+
+                    b.Property<int>("PortfolioId");
+
+                    b.Property<int>("SocialSecurity");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("PortfolioId");
+
+                    b.ToTable("PortfolioContacts");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRoleClaim<string>", b =>
@@ -316,40 +316,40 @@ namespace PropertyManagement.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("PropertyManagement.Models.AccountModels.AccountCommunication", b =>
-                {
-                    b.HasOne("PropertyManagement.Models.AccountModels.AccountContact", "AccountContact")
-                        .WithMany("AccountCommunications")
-                        .HasForeignKey("AccountContactId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("PropertyManagement.Models.AccountModels.Account", "Account")
-                        .WithMany("AccountCommunications")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
-            modelBuilder.Entity("PropertyManagement.Models.AccountModels.AccountContact", b =>
-                {
-                    b.HasOne("PropertyManagement.Models.AccountModels.Account", "Account")
-                        .WithMany("AccountContacts")
-                        .HasForeignKey("AccountId")
-                        .OnDelete(DeleteBehavior.Cascade);
-                });
-
             modelBuilder.Entity("PropertyManagement.Models.EmailAddress", b =>
                 {
-                    b.HasOne("PropertyManagement.Models.AccountModels.AccountContact", "AccountContact")
+                    b.HasOne("PropertyManagement.Models.PortfolioModels.PortfolioContact", "PortfolioContact")
                         .WithMany("EmailAddresses")
-                        .HasForeignKey("AccountContactId")
+                        .HasForeignKey("PortfolioContactId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("PropertyManagement.Models.PhoneNumber", b =>
                 {
-                    b.HasOne("PropertyManagement.Models.AccountModels.AccountContact", "AccountContact")
+                    b.HasOne("PropertyManagement.Models.PortfolioModels.PortfolioContact", "PortfolioContact")
                         .WithMany("PhoneNumbers")
-                        .HasForeignKey("AccountContactId")
+                        .HasForeignKey("PortfolioContactId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PropertyManagement.Models.PortfolioModels.PortfolioCommunication", b =>
+                {
+                    b.HasOne("PropertyManagement.Models.PortfolioModels.PortfolioContact", "PortfolioContact")
+                        .WithMany("PortfolioCommunications")
+                        .HasForeignKey("PortfolioContactId")
+                        .OnDelete(DeleteBehavior.Cascade);
+
+                    b.HasOne("PropertyManagement.Models.PortfolioModels.Portfolio", "Portfolio")
+                        .WithMany("PortfolioCommunications")
+                        .HasForeignKey("PortfolioId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("PropertyManagement.Models.PortfolioModels.PortfolioContact", b =>
+                {
+                    b.HasOne("PropertyManagement.Models.PortfolioModels.Portfolio", "Portfolio")
+                        .WithMany("PortfolioContacts")
+                        .HasForeignKey("PortfolioId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
         }

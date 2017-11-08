@@ -1,4 +1,4 @@
-﻿using PropertyManagement.Models.AccountModels;
+﻿using PropertyManagement.Models.PortfolioModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,7 +11,7 @@ namespace PropertyManagement.Models
     {
 		[Key]
 		public int Id { get; set; }
-		public int AccountContactId { get; set; }
+		public int PortfolioContactId { get; set; }
 
 		public PhoneNumberType PhoneNumberType { get; set; }
 		public int AreaCode { get; set; }
@@ -20,7 +20,7 @@ namespace PropertyManagement.Models
 		public int Extension { get; set; }
 		public DateTime BestTime { get; set; }
 
-		public virtual AccountContact AccountContact { get; set; }
+		public virtual PortfolioContact PortfolioContact { get; set; }
 	}
 
 	public enum PhoneNumberType

@@ -1,4 +1,4 @@
-﻿using PropertyManagement.Models.AccountModels;
+﻿using PropertyManagement.Models.PortfolioModels;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -11,10 +11,10 @@ namespace PropertyManagement.Models
     {
 		[Key]
 		public int Id { get; set; }
-		public int AccountContactId { get; set; }
+		public int PortfolioContactId { get; set; }
 
 		public string Email { get; set; }
 
-		public virtual AccountContact AccountContact { get; set; }
+		public virtual PortfolioContact PortfolioContact { get; set; }
 	}
 }

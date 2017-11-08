@@ -1,22 +1,55 @@
+@model PropertyManagement.Models.Lead
+
 @{
-    ViewData["Title"] = "Get Started";
+		ViewData["Title"] = "Get Started";
 }
 
-<h3>Lets Get Started!</h3>
-<div class="col-sm-12">
-	<p>Leave is a little bit of information about yourself and your investment property, and we will contact you soon!</p>
-</div>
-<section id="step-one">
-	<div class="col-sm-12">
-		<label for="name-first">First Name</label>
-		<input type="text" id="name-first" class="form-control" />
+<h2>Lets Get Started!</h2>
+<form asp-action="Index" class="col-sm-12 col-md-9 col-lg-6">
+	<div class="form-horizontal">
+		<p>Leave us a little bit of information about yourself and your investment property, and we will contact you soon!</p>
+		<hr />
+		<div class="form-group">
+			<label asp-for="NameFirst" class="col-md-5 control-label"></label>
+			<div class="col-md-7">
+				<input asp-for="NameFirst" class="form-control" data-required="true" />
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="NameLast" class="col-md-5 control-label"></label>
+			<div class="col-md-7">
+				<input asp-for="NameLast" class="form-control" data-required="true"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="Email" class="col-md-5 control-label"></label>
+			<div class="col-md-7">
+				<input asp-for="Email" class="form-control" type="email" data-required="true"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="Phone" class="col-md-5 control-label"></label>
+			<div class="col-md-7">
+				<input asp-for="Phone" class="form-control" type="tel" data-required="true"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="Zip" class="col-md-5 control-label"></label>
+			<div class="col-md-7">
+				<input asp-for="Zip" class="form-control" type="text" data-required="true"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label asp-for="BestTime" class="col-md-5 control-label"></label>
+			<div class="col-md-7">
+				<input asp-for="BestTime" class="form-control" type="time" data-required="true"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<div class="col-md-12">
+				<input type="submit" value="Submit" class="btn btn-primary pull-right" />
+			</div>
+		</div>
 	</div>
-	<div class="col-sm-12">
-		<label for="name-last">Last Name</label>
-		<input type="text" id="name-last" class="form-control" />
-	</div>
-	<div class="col-sm-12">
-
-	</div>
-</section>
+</form>
 
