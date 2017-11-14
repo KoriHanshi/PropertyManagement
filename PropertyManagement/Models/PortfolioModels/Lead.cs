@@ -20,6 +20,11 @@ namespace PropertyManagement.Models.PortfolioModels
 
 		[DisplayName("Phone Number")]
 		public string Phone { get; set; }
+		public int AreaCode { get; set; }
+		public int FirstThree { get; set; }
+		public int LastFour { get; set; }
+		public int Extension { get; set; }
+		public PhoneNumberType PhoneNumberType { get; set; }
 
 		[DisplayName("Zipcode of Rental Property")]
 		public int Zip { get; set; }

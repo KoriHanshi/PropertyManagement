@@ -16,5 +16,10 @@ namespace PropertyManagement.Models
 		public string Email { get; set; }
 
 		public virtual PortfolioContact PortfolioContact { get; set; }
+
+		public EmailAddress(string email)
+		{
+			Email = email;
+		}
 	}
 }

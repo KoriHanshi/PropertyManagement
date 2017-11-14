@@ -10,9 +10,10 @@
 
 			$('input, select, textarea', form).
 				filter(function (i, e) {
-					return ($(this).prop('type') != 'button' && $(this).prop('type') != 'submit');
-				}).each(function (i) {
+					return $(e).hasClass('form-control');
+				}).each(function () {
 					valid = validateField(this) && valid;
+					console.log(valid);
 				});
 
 			return valid;
@@ -49,12 +50,12 @@
 			}
 
 			function validateText($element) {
-				var valid = ($element.val() != undefined && $element.val() != null && $element.val().trim() != '');
+				var valid = ($element.val() !== undefined && $element.val() !== null && $element.val().trim() !== '');
 				return display(valid, label($element) + ' is required');
 			}
 
 			function validateSelect($element) {
-				var valid = ($element.val() != undefined && $element.val() != null && $('option:selected', $element).text().trim() != '');
+				var valid = ($element.val() !== undefined && $element.val() !== null && $('option:selected', $element).text().trim() !== '');
 				return display(valid, label($element) + ' is required');
 			};
 
@@ -98,7 +99,7 @@
 			return valid; 
 		};
 
-		return ($(this).prop('tagName') == 'FORM') ? validateForm(this) : validateField(this);
+		return ($(this).prop('tagName') === 'FORM') ? validateForm(this) : validateField(this);
 	};
 	$.registerValidation = function () {
 
@@ -112,7 +113,7 @@
 		//register validation on field blur
 		$('input, select, textarea').
 			filter(function (i, e) {
-				return ($(this).prop('type') != 'button' && $(this).prop('type') != 'submit');
+				return $(e).hasClass('form-control');
 			}).each(function () {
 				$(this).on('blur', function () {
 					$(this).validate();
@@ -133,7 +134,7 @@
 		};
 
 		function action(a) {
-			return (a && a != '' && a != 'Index') ? '/' + a : '';
+			return (a && a !== '' && a !== 'Index') ? '/' + a : '';
 		}
 
 		function parameters(data) {
@@ -150,7 +151,7 @@
 
 		};
 
-		(data['controller'] && data['controller'] != '') ?
+		(data['controller'] && data['controller'] !== '') ?
 			window.location.href = '/' + data['controller'] + action(data['action']) + parameters(data) :
 			console.error('Navigation Failed! - Invalid URL');
 	};

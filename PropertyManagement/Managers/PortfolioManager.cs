@@ -12,6 +12,7 @@ namespace PropertyManagement.Managers
     {
 		private readonly ApplicationDbContext context;
 		private Portfolio portfolio;
+		private PortfolioContact portfolioContact;
 
 		public PortfolioManager(ApplicationDbContext context)
 		{
@@ -20,12 +21,37 @@ namespace PropertyManagement.Managers
 
 		public async Task<Portfolio> CreatePortfolio(Lead lead)
 		{
-			portfolio = new Portfolio
-			{
+			context.Portfolios.Add(
+				new Portfolio
+				{
+					PortfolioStatus = PortfolioStatus.Prospect,
+					PortfolioContacts = new List<PortfolioContact>
+					{
+						new PortfolioContact
+						{
+							PortfolioContactType = PortfolioContactType.Main,
+							FirstName = lead.NameFirst,
+							LastName = lead.NameLast,
+							PhoneNumbers = new List<PhoneNumber>
+							{
+								new PhoneNumber
+								{
+									PhoneNumberType = lead.PhoneNumberType,
+									AreaCode = lead.AreaCode,
+									FirstThree = lead.FirstThree,
+									LastFour = lead.LastFour,
+									Extension = lead.Extension
+								}
+							},
+							EmailAddresses = new List<EmailAddress>
+							{
+								new EmailAddress(lead.Email)
+							}
+						}
+					}
+				}
+			);
 
-			};
-
-			context.Portfolios.Add(portfolio);
 			await context.SaveChangesAsync();
 			return portfolio;
 		}
